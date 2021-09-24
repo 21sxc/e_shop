@@ -32,7 +32,8 @@
     "less": "^4.1.1",
     "less-loader": "^7.3.0",
     "vue-cli-plugin-element": "^1.0.1",
-    "vue-template-compiler": "^2.6.11"
+    "vue-template-compiler": "^2.6.11",
+    "webpack-dev-server": "^3.0.0"
   },
   "lint": "./node_modules/.bin/eslint src/**",
   "lint:fix": "./node_modules/.bin/eslint src/**  --fix"
