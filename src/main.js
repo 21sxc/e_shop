@@ -12,6 +12,9 @@ import './assets/fonts/iconfont.css'
 // 导入表格树
 import TreeTable from 'vue-table-with-tree-grid'
 
+//导入vue富文本组件
+import VueQuillEditor from 'vue-quill-editor'
+
 //导入axios
 import axios from 'axios'
 //配置请求的根路径
@@ -28,6 +31,27 @@ Vue.config.productionTip = false
 
 // 组件全局注册 表格树
 Vue.component('tree-table', TreeTable)
+
+//导入副本本样式列表
+// require styles
+import 'quill/dist/quill.core.css'
+import 'quill/dist/quill.snow.css'
+import 'quill/dist/quill.bubble.css'
+
+//全局注册富文本组件
+Vue.use(VueQuillEditor)
+
+//挂载时间戳
+Vue.filter('dateFormat', function(originVal){
+  const dt = new Date(originVal)
+  const y = dt.getFullYear()
+  const m = (dt.getMonth()+1+'').padStart(2, '0')
+  const d = (dt.getDate()+1+'').padStart(2, '0')
+  const hh = (dt.getHours()+1+'').padStart(2, '0')
+  const mm = (dt.getMinutes()+1+'').padStart(2, '0')
+  const ss = (dt.getSeconds()+1+'').padStart(2, '0')
+  return `${y}-${m}-${d} ${hh}:${mm}:${ss}`
+})
 
 new Vue({
   router,
