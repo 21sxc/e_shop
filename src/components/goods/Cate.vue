@@ -52,11 +52,11 @@
           <el-button type="primary"
                      icon="el-icon-edit"
                      size="mini"
-                     @click="showEditCateDialog(scope.row.cat_id)"></el-button>
+                     @click="showEditCateDialog(scope.row.cat_id)">编辑</el-button>
           <el-button type="danger"
                      icon="el-icon-delete"
                      size="mini"
-                     @click="removeCate(scope.row.cat_id)"></el-button>
+                     @click="removeCate(scope.row.cat_id)">删除</el-button>
 
         </template>
       </tree-table>

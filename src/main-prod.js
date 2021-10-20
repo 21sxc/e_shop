@@ -1,7 +1,7 @@
 import Vue from 'vue'
 import App from './App.vue'
 import router from './router'
-import './plugins/element.js'
+// import './plugins/element.js'
 
 //导入全局样式表
 import './assets/css/global.css'
@@ -15,28 +15,36 @@ import TreeTable from 'vue-table-with-tree-grid'
 //导入vue富文本组件
 import VueQuillEditor from 'vue-quill-editor'
 
+//导入nprogress进度条组件和样式
+import  NProgress  from 'nprogress'
+
 //导入axios
 import axios from 'axios'
 //配置请求的根路径
 axios.defaults.baseURL ='https://lianghj.top:8888/api/private/v1/'
+
+//在request拦截器中展示进度条， NProgress.start()
 axios.interceptors.request.use(config => {
+  NProgress.start()
   // console.log(config);
   config.headers.Authorization = window.sessionStorage.getItem('token')
   //最后必须return config
   return config
 })
+
+//在response拦截器中关闭进度条， NProgress.done()
+axios.interceptors.response.use(config => {
+  NProgress.done()
+  //最后必须return config
+  return config
+})
+
 Vue.prototype.$http = axios
 
 Vue.config.productionTip = false
 
 // 组件全局注册 表格树
 Vue.component('tree-table', TreeTable)
-
-//导入副本本样式列表
-// require styles
-import 'quill/dist/quill.core.css'
-import 'quill/dist/quill.snow.css'
-import 'quill/dist/quill.bubble.css'
 
 //全局注册富文本组件
 Vue.use(VueQuillEditor)
