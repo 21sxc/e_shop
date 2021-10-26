@@ -18,6 +18,9 @@ import VueQuillEditor from 'vue-quill-editor'
 //导入nprogress进度条组件和样式
 import  NProgress  from 'nprogress'
 
+//导入时间戳moment组件
+import moment from 'moment'
+
 //导入axios
 import axios from 'axios'
 //配置请求的根路径
@@ -49,17 +52,22 @@ Vue.component('tree-table', TreeTable)
 //全局注册富文本组件
 Vue.use(VueQuillEditor)
 
-//挂载时间戳
-Vue.filter('dateFormat', function(originVal){
-  const dt = new Date(originVal)
-  const y = dt.getFullYear()
-  const m = (dt.getMonth()+1+'').padStart(2, '0')
-  const d = (dt.getDate()+1+'').padStart(2, '0')
-  const hh = (dt.getHours()+1+'').padStart(2, '0')
-  const mm = (dt.getMinutes()+1+'').padStart(2, '0')
-  const ss = (dt.getSeconds()+1+'').padStart(2, '0')
-  return `${y}-${m}-${d} ${hh}:${mm}:${ss}`
+// 定义时间格式全局过滤器
+Vue.filter('dateFormat', function (daraStr, pattern = 'YYYY-MM-DD HH:mm:ss') {
+  return moment(daraStr).format(pattern)
 })
+
+// //挂载时间戳
+// Vue.filter('dateFormat', function(originVal){
+//   const dt = new Date(originVal)
+//   const y = dt.getFullYear()
+//   const m = (dt.getMonth()+1+'').padStart(2, '0')
+//   const d = (dt.getDate()+1+'').padStart(2, '0')
+//   const hh = (dt.getHours()+1+'').padStart(2, '0')
+//   const mm = (dt.getMinutes()+1+'').padStart(2, '0')
+//   const ss = (dt.getSeconds()+1+'').padStart(2, '0')
+//   return `${y}-${m}-${d} ${hh}:${mm}:${ss}`
+// })
 
 new Vue({
   router,
